@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+  
+  pre_tasks:
+  - name: Only update cache if needed
+    apt:
+      update_cache: true
+      cache_valid_time: 3600
+
+  tasks:
+  - name: Ensure all the applications are up to date.
+    apt:
+      name: "*"
+      state: latest
